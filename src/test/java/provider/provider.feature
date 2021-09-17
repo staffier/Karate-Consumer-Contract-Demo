@@ -47,5 +47,20 @@ Feature: Validate incoming requests conform to a particular schema
     * def response = "Bingo!"
 
   Scenario:
-    * def responseStatus = 400
-    * def response = { "message": "Your request does not look good" }
+    # Define a generic error response along with a specific response for requests without an id:
+    * def genericResponse = { "message": "Your request did not conform to the schema" }
+    * def missingIdResponse = { "message": "Your request is missing an ID" }
+
+    # Create a variable that will set a response status and body for error scenarios:
+    * def abortWithResponse =
+      """
+        function(responseStatus, response) {
+          karate.set('response', response);
+          karate.set('responseStatus', responseStatus);
+          karate.abort();
+        }
+      """
+
+    # Send the appropriate response to the Consumer:
+    * if (!request.id) abortWithResponse(400, missingIdResponse)
+    * abortWithResponse(400, genericResponse)

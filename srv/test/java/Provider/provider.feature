@@ -2,7 +2,7 @@ Feature: Validate incoming requests conform to a particular schema
 
   Background:
     # Tap into our DataGenerator (Java faker):
-    * def dataGenerator = Java.type('sample_tests.functional_tests.helpers.DataGenerator')
+    * def dataGenerator = Java.type('helpers.DataGenerator')
 
     # Produce a random quote using our Java faker variable:
     * def randomQuote = dataGenerator.getRandomQuote()

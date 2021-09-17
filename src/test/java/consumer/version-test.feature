@@ -74,7 +74,7 @@ Feature: A demo of how versioning would work on the consumer side
     * status 200
     * match response == { "id": "#uuid", "message": "#string" }
 
-  Scenario: Version 3 - Missing a required field (id) - expected to fail with an ID-specific error message
+  Scenario: Version 3 - Missing a required field (id)
     * request
       """
         {
@@ -95,8 +95,13 @@ Feature: A demo of how versioning would work on the consumer side
         }
       """
     * method post
-    * status 400
-    * match response == { "message": "Your request is missing an ID" }
+    # This will fail, since the request is missing an id field
+    * status 200
+    * match response == { "id": "#uuid", "message": "#string" }
+
+#    The logs will show this is what was returned from the Provider, instead:
+#    * status 400
+#    * match response == { "message": "Your request is missing an ID" }
 
   Scenario: Version 4 - Missing a required field (firstName) - expected to fail with a generic error message
     * request
@@ -118,5 +123,10 @@ Feature: A demo of how versioning would work on the consumer side
         }
       """
     * method post
-    * status 400
-    * match response == { "message": "Your request did not conform to the schema" }
+    # This will fail, since the request is missing an id field
+    * status 200
+    * match response == { "id": "#uuid", "message": "#string" }
+
+#    The logs will show this is what was returned from the Provider, instead:
+#    * status 400
+#    * match response == { "message": "Your request did not conform to the schema" }

@@ -5,7 +5,7 @@ Feature: A few tests to showcase dynamic request generation & schema validation
     * call read('classpath:helpers/config.feature')
 
     # Start our server:
-    * def startMockServer = () => karate.start('classpath:provider/provider.feature').port
+    * def startMockServer = () => karate.start('classpath:provider/provider_v1.feature').port
     * def port = callonce startMockServer
     * url 'http://localhost:' + port
 

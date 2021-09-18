@@ -115,8 +115,7 @@ Feature: A demo of how versioning would work on the consumer side
             "street": "#(randomStreet)",
             "city": "#(randomCity)",
             "state": "#(randomState)",
-            "zip": "#(randomZip)",
-            "country": "US"
+            "zip": "#(randomZip)"
           },
           "company": "#(randomCompany)",
           "boolean": true

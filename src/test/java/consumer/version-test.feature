@@ -74,7 +74,7 @@ Feature: A demo of how versioning would work on the consumer side
     * status 200
     * match response == { "id": "#uuid", "message": "#string" }
 
-  Scenario: Version 3 - Missing a required field (id)
+  Scenario: Version 3 - Missing a required field (id) - expected to fail with an id-specific error message
     * request
       """
         {

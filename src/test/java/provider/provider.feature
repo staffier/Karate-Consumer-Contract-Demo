@@ -1,11 +1,8 @@
 Feature: Validate incoming requests conform to a particular schema
 
   Background:
-    # Tap into our DataGenerator (Java faker):
-    * def dataGenerator = Java.type('helpers.DataGenerator')
-
-    # Produce a random quote using our Java faker variable:
-    * def randomQuote = dataGenerator.getRandomQuote()
+    # Grab some universal configurations:
+    * call read('classpath:helpers/config.feature')
 
     # Define a schema we want to use to validate incoming requests against:
     * def schema =
@@ -27,61 +24,6 @@ Feature: Validate incoming requests conform to a particular schema
         }
       """
     * def schemaValidator = function() { return karate.match("request contains deep schema").pass }
-
-    # Define various error responses:
-    * def validateBoolean =
-      """
-      function(keys) {
-        var req = karate.get('request');
-        keys.forEach(key => {
-          var val = req[key];
-          var msg = null;
-          if (karate.typeOf(val) != 'boolean') {
-            msg = 'bad';
-          }
-          if (msg) {
-            karate.set('responseStatus', 400);
-            karate.set('response', { message: `${key} is ${msg}` });
-            karate.abort();
-          }
-        });
-      }
-      """
-    * def validateString =
-      """
-      function(keys) {
-        var req = karate.get('request');
-        keys.forEach(key => {
-          var val = null;
-          try {
-            val = karate.jsonPath(req, key);
-          } catch (error) {
-            // path does not exist
-          }
-          var msg = null;
-          if (karate.typeOf(val) != 'string') {
-            msg = 'missing';
-          } else if (val.length < 1) {
-            msg = 'bad';
-          }
-          if (msg) {
-            karate.set('responseStatus', 400);
-            karate.set('response', { message: `${key} is ${msg}` });
-            karate.abort();
-          }
-        });
-      }
-      """
-
-    # Create a variable that will set a response status and body for error scenarios:
-    * def abortWithResponse =
-      """
-        function(responseStatus, response) {
-          karate.set('response', response);
-          karate.set('responseStatus', responseStatus);
-          karate.abort();
-        }
-      """
 
     # Add a random delay (200 - 600ms) to each response:
     * def responseDelay = 200 + Math.random() * 400

@@ -6,12 +6,7 @@ class ConsumerRunner {
 
     @Karate.Test
     Karate testAllConsumersWithOneFile() {
-        return Karate.run("all-versions").relativeTo(getClass());
-    }
-
-    @Karate.Test
-    Karate testAllConsumersWithMultipleFiles() {
-        return Karate.run("classpath:consumer/versions").relativeTo(getClass());
+        return Karate.run("caller").relativeTo(getClass());
     }
 
 }

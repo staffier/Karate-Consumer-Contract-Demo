@@ -4,8 +4,10 @@ Feature: A demo of how versioning would work on the consumer side with each vers
     # Grab some universal configurations:
     * call read('classpath:helpers/config.feature')
 
-    # Start our server:
-    * def startMockServer = () => karate.start('classpath:provider/provider_v1.feature').port
+    # Start our server (providerVersion is provided by caller.feature):
+    * def version = '#(providerVersion)'
+    * def server = 'classpath:provider/provider_' + providerVersion + '.feature'
+    * def startMockServer = () => karate.start(server).port
     * def port = callonce startMockServer
     * url 'http://localhost:' + port
 

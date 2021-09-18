@@ -25,9 +25,6 @@ Feature: Validate incoming requests conform to a particular schema
       """
     * def schemaValidator = function() { return karate.match("request contains deep schema").pass }
 
-    # Add a random delay (200 - 600ms) to each response:
-    * def responseDelay = 200 + Math.random() * 400
-
   # This scenario will be used if an incoming request conforms to the schema
   Scenario: schemaValidator()
     * def responseStatus = 200
@@ -39,11 +36,6 @@ Feature: Validate incoming requests conform to a particular schema
         "message": "#(randomQuote)"
       }
       """
-
-  # This scenario will be used if an incoming request contains a 'key' parameter
-  Scenario: paramExists('key')
-    * def responseStatus = 200
-    * def response = "Bingo!"
 
   # This is a catch-all scenario, which will be used if the expressions in the previous two scenarios do not resolve to 'true'
   Scenario:

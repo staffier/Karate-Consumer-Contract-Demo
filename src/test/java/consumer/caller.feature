@@ -1,4 +1,4 @@
-Feature: Use this to test responses from various Providers
+Feature: Use this to test various Consumer:Provider combinations
 
   Background:
     # Grab some universal configurations:

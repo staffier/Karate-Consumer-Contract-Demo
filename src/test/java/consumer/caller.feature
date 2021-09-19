@@ -12,7 +12,7 @@ Feature: Use this to test various Consumer:Provider combinations
     # Start our server:
     * def server = 'classpath:provider/provider_' + '<providerVersion>' + '.feature'
     * def startMockServer = () => karate.start(server).port
-    * def port = callonce startMockServer
+    * def port = call startMockServer
 
     # Test each of our Consumer:Provider combinations
     * call read('<scenario>')

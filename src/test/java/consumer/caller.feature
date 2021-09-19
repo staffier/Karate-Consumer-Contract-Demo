@@ -18,13 +18,13 @@ Feature: Use this to test various Consumer:Provider combinations
     * call read('<scenario>')
 
     Examples:
-      | scenario                                        | providerVersion |
-      | classpath:consumer/versions/consumer_v1.feature | v1              |
-      | classpath:consumer/versions/consumer_v1.feature | v2              |
-      | classpath:consumer/versions/consumer_v2.feature | v1              |
-      | classpath:consumer/versions/consumer_v2.feature | v2              |
-      | classpath:consumer/versions/consumer_v3.feature | v1              |
-      | classpath:consumer/versions/consumer_v3.feature | v2              |
-      | classpath:consumer/versions/consumer_v4.feature | v1              |
-      | classpath:consumer/versions/consumer_v4.feature | v2              |
+      | scenario                                        | consumerVersion | providerVersion |
+      | classpath:consumer/versions/consumer_v1.feature | v1              | v1              |
+      | classpath:consumer/versions/consumer_v1.feature | v1              | v2              |
+      | classpath:consumer/versions/consumer_v2.feature | v2              | v1              |
+      | classpath:consumer/versions/consumer_v2.feature | v2              | v2              |
+      | classpath:consumer/versions/consumer_v3.feature | v3              | v1              |
+      | classpath:consumer/versions/consumer_v3.feature | v3              | v2              |
+      | classpath:consumer/versions/consumer_v4.feature | v4              | v1              |
+      | classpath:consumer/versions/consumer_v4.feature | v4              | v2              |
 

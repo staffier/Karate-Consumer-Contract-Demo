@@ -8,23 +8,22 @@ Feature: Use this to test various Consumer:Provider combinations
     * configure logPrettyRequest = true
     * configure logPrettyResponse = true
 
-  Scenario Outline: Consumer <consumerVersion> calling Provider <providerVersion>
+  Scenario Outline: Consumer <consumer> calling Provider <provider>
     # Start our server:
-    * def server = 'classpath:provider/provider_' + '<providerVersion>' + '.feature'
+    * def server = 'classpath:provider/' + '<provider>' + '.feature'
     * def startMockServer = () => karate.start(server).port
     * def port = call startMockServer
 
     # Test each of our Consumer:Provider combinations
-    * call read('<scenario>')
+    * call read('classpath:consumer/versions/' + '<consumer>' + '.feature')
 
     Examples:
-      | scenario                                        | consumerVersion | providerVersion |
-      | classpath:consumer/versions/consumer_v1.feature | v1              | v1              |
-      | classpath:consumer/versions/consumer_v1.feature | v1              | v2              |
-      | classpath:consumer/versions/consumer_v2.feature | v2              | v1              |
-      | classpath:consumer/versions/consumer_v2.feature | v2              | v2              |
-      | classpath:consumer/versions/consumer_v3.feature | v3              | v1              |
-      | classpath:consumer/versions/consumer_v3.feature | v3              | v2              |
-      | classpath:consumer/versions/consumer_v4.feature | v4              | v1              |
-      | classpath:consumer/versions/consumer_v4.feature | v4              | v2              |
-
+      | consumer    | provider    |
+      | consumer_v1 | provider_v1 |
+      | consumer_v1 | provider_v2 |
+      | consumer_v2 | provider_v1 |
+      | consumer_v2 | provider_v2 |
+      | consumer_v3 | provider_v1 |
+      | consumer_v3 | provider_v2 |
+      | consumer_v4 | provider_v1 |
+      | consumer_v4 | provider_v2 |
